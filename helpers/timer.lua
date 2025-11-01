@@ -1,0 +1,24 @@
+timer = {}
+
+--timer.mdelay(timeout) - 硬阻塞指定时长
+--传入值：
+--int 阻塞时长,单位ms, 最高1024ms, 实际使用强烈建议不要超过200ms
+--返回值：
+--nil 无返回值
+--例子：
+---- 期间没有任何luat代码会执行,包括底层消息处理机制
+---- 本方法通常不会使用,除非你很清楚会发生什么
+--timer.mdelay(10)
+function timer.mdelay(timeout) end
+
+--timer.udelay(timeout) - 硬阻塞指定时长但us级别,不会很精准
+--传入值：
+--int 阻塞时长,单位us, 最大3000us
+--返回值：
+--nil 无返回值
+--例子：
+---- 本方法通常不会使用,除非你很清楚会发生什么
+---- 本API在 2023.05.18 添加
+--timer.udelay(10)
+---- 实际阻塞时长是有波动的
+function timer.udelay(timeout) end
