@@ -2,12 +2,15 @@
 
 最后生成时间：**2025/11/02 19:44:07**
 
+## 下载LuatOS-ide-helper
+下载并解压缩`LuatOS-ide-helper.zip`放到某个文件夹，例如`D:/Luatools/resource/LuatOS_IDE_Helpers`
+
 ## 安装扩展
 
 1. VSCode 扩展市场搜索 `emmylua` 并安装
 2. 建议卸载其他`Lua`扩展，防止冲突
 
-> 我们推荐使用`emmylua`扩展，当前您想使用其他`Lua`扩展也完全没问题，请自行根据对应的扩展进行设置。
+> 我们推荐使用`emmylua`扩展，当然您想使用其他`Lua`扩展或也完全没问题，请自行根据对应的扩展进行设置。
 
 ```yaml
 名称: EmmyLua
