@@ -1,0 +1,97 @@
+---@meta
+
+--- LuatOS IDE Helper for module: fatfs
+--- ```yaml
+--- Summary: 读写fatfs格式
+--- URL: https://gitee.com/openLuat/LuatOS/tree/master/luat/../components/fatfs/luat_lib_fatfs.c
+--- Demo: https://gitee.com/openLuat/LuatOS/tree/master/demo/fatfs
+--- Video: 
+--- Tag: LUAT_USE_FATFS
+--- ```
+--- ```lua
+--- 通常只使用fatfs.mount挂载tf/sd卡,其他操作走io库就可以了
+--- ```
+fatfs = {}
+
+--- 挂载fatfs
+---@param mode number fatfs模式,可选fatfs.SPI,fatfs.SDIO,fatfs.RAM,fatfs.USB
+---@param mount_point string 虚拟文件系统的挂载点, 默认是 /fatfs
+---@param spiid_or_spidevice number 传入spi device指针,或者spi的id,或者sdio的id
+---@param spi_cs number 片选脚的GPIO 号, spi模式有效. 特别约定,若前一个参数传的是spi device,这个参数要传SPI最高速度, 就是传2个"SPI最高速度", 也可以两个都填nil.
+---@param spi_speed number SPI最高速度,默认10M.
+---@param power_pin number TF卡电源控制脚,TF卡初始前先拉低复位再拉高,如果没有,或者是内置电源控制方式,这个参数就不需要传
+---@param power_on_delay number TF卡电源复位过程时间,单位ms,默认值是1
+---@param auto_format boolean 挂载失败是否尝试格式化,默认是true,即自动格式化. 本参数在2023.8.16添加
+---@return boolean #1 成功返回true, 否则返回nil或者false
+---@return string #2 失败的原因
+--- ```lua
+--- 方法1, 使用SPI模式
+---     local spiId = 2
+---     local result = spi.setup(
+---         spiId,--spi id
+---         255, -- 不使用默认CS脚
+---         0,--CPHA
+---         0,--CPOL
+---         8,--数据宽度
+---         400*1000  -- 初始化时使用较低的频率
+---     )
+---     local TF_CS = 8
+---     gpio.setup(TF_CS, 1)
+--- fatfs.debug(1) -- 若挂载失败,可以尝试打开调试信息,查找原因
+--- 提醒, 若TF/SD模块带电平转换, 通常不支持10M以上的波特率!!
+---     fatfs.mount(fatfs.SPI,"/sd", spiId, TF_CS, 24000000)
+---     local data, err = fatfs.getfree("/sd")
+---     if data then
+---         log.info("fatfs", "getfree", json.encode(data))
+---     else
+---         log.info("fatfs", "err", err)
+---     end
+--- 往下的操作, 使用 io.open("/sd/xxx", "w+") 等io库的API就可以了
+--- 方法2, 使用spi device方式
+---     local spiId = 2
+---     local TF_CS = 8
+--- 选一个合适的全局变量名
+---     tf_spi_dev = spi.device_setup(spiId, TF_CS, 0, 8, 20*1000*1000)
+---     fatfs.mount(fatfs.SPI,"/sd", tf_spi_dev)
+--- ```
+function fatfs.mount(mode, mount_point, spiid_or_spidevice, spi_cs, spi_speed, power_pin, power_on_delay, auto_format) end
+
+--- 取消挂载fatfs
+---@param mount_point string 虚拟文件系统的挂载点, 默认是 fatfs,必须与fatfs.mount一致
+---@return number #1 成功返回0, 否则返回失败码
+--- ```lua
+--- 注意, 取消挂载, 在 2025.9.29 之后编译的固件才真正支持
+--- fatfs.mount("/sd")
+--- ```
+function fatfs.unmount(mount_point) end
+
+--- 获取可用空间信息
+---@param mount_point string 挂载点, 需要跟fatfs.mount传入的值一致
+---@return table #1 若成功会返回table,否则返回nil
+---@return number #2 导致失败的底层返回值
+--- ```lua
+--- table包含的内容有
+--- total_sectors 总扇区数量
+--- free_sectors 空闲扇区数量
+--- total_kb 总字节数,单位kb
+--- free_kb 空闲字节数, 单位kb
+--- 注意,当前扇区大小固定在512字节
+---     local data, err = fatfs.getfree("SD")
+---     if data then
+---         log.info("fatfs", "getfree", json.encode(data))
+---     else
+---         log.info("fatfs", "err", err)
+---     end
+--- ```
+function fatfs.getfree(mount_point) end
+
+--- 设置调试模式
+---@param value number 是否进入调试模式,1代表进入调试模式,增加调试日志
+---@return nil #1 无返回值
+function fatfs.debug(value) end
+
+--- 设置fatfs一些特殊参数，大部分卡无需配置，部分不能正常读写的卡，经过配置后可能能读写成功
+---@param crc_check number 读取时是否跳过CRC检查,1跳过不检查CRC,0不跳过检查CRC,默认不跳过,除非TF卡不支持CRC校验,否则不应该跳过!
+---@param write_to number 单次写入超时时间,单位ms,默认100ms。
+---@return nil #1 无返回值
+function fatfs.config(crc_check, write_to) end

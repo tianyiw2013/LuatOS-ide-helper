@@ -1,18 +1,45 @@
-## 根据luatos的snippets自动生成ide helpers
+# LuatOS IDE Helper 使用说明 (VSCode)
+
+最后生成时间：**2025/11/02 19:44:07**
+
+## 安装扩展
+
+1. VSCode 扩展市场搜索 `emmylua` 并安装
+2. 建议卸载其他`Lua`扩展，防止冲突
+
+> 我们推荐使用`emmylua`扩展，当前您想使用其他`Lua`扩展也完全没问题，请自行根据对应的扩展进行设置。
+
+```yaml
+名称: EmmyLua
+ID: tangzx.emmylua
+说明: EmmyLua for vscode
+发布者: Tangzx
+VS Marketplace 链接: https://marketplace.visualstudio.com/items?itemName=tangzx.emmylua
 ```
-https://gitee.com/chenxuuu/luatos-vscode-addons/blob/master/snippets/lua.json
+
+## 设置项目
+
+1. 项目根目录新建文件`.emmyrc.json`
+2. 将下面`json`代码复制到`.emmyrc.json`并保存
+
+    *😳 不要忘记把路径改成你电脑的路径*
+
+```json
+{
+    "workspace": {
+        "library": [
+            "D:/Luatools/resource/LuatOS_IDE_Helpers"
+        ]
+    }
+}
 ```
 
-## VSCODE 使用方法
-1. 下载`helpers`目录到你的电脑，不要把helpers放到你项目里
-2. VSCODE安装扩展Lua `sumneko.lua`
-2. 配置`Lua.workspace.library`，将`helpers`目录添加进去。
+## 其他说明
 
+- [LuatOS_IDE_Helpers](https://gitee.com/openLuat/LuatOS/tree/master/tools/LuatOS_IDE_Helpers)文件使用`python`脚本自动提取自`LuatOS`源码中的`@api`注解
+- 若发现错误请及时请往git仓库提交[issue](https://gitee.com/openLuat/LuatOS/issues)，或直接提交[PR](https://gitee.com/openLuat/LuatOS/pulls)
+- 获取最新版本请前方官方Git下载 [LuatOS_IDE_Helpers](https://gitee.com/openLuat/LuatOS/tree/master/tools/LuatOS_IDE_Helpers)
 
-<img width="325" height="89" alt="image" src="https://github.com/user-attachments/assets/6525787a-7db4-4979-a73b-f01f12051b63" />
+## 待解决问题
 
-<img width="612" height="203" alt="wechat_2025-11-01_210749_084" src="https://github.com/user-attachments/assets/b9d0fe6c-a0ef-4afd-a7ba-e6afe8f03a75" />
-
-<img width="1138" height="301" alt="image" src="https://github.com/user-attachments/assets/7815f1cb-9d60-4796-bd2e-18e92b3ddbc2" />
-
-<img width="1099" height="311" alt="image" src="https://github.com/user-attachments/assets/a21424ac-e9e9-41fa-b8d0-b48d90059ae2" />
+目前很多函数的参数是可选的，暂时无法自动判断哪些参数是可选的，所以编辑器可能提示“缺少参数”，后期会修复该问题
