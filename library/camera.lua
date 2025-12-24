@@ -28,6 +28,9 @@ camera.ROTATE_0 = 0
 --- 摄像头预览，画面旋转90度 (number)
 camera.ROTATE_90 = 0
 
+--- 摄像头预览，画面旋转180度 (number)
+camera.ROTATE_180 = 0
+
 --- 摄像头预览，画面旋转270度 (number)
 camera.ROTATE_270 = 0
 
@@ -46,11 +49,20 @@ camera.CONF_H264_IMB_BITS = 0
 --- H264编码器PMB_BITS值 (number)
 camera.CONF_H264_PMB_BITS = 0
 
+--- H264编码器P帧数量 (number)
+camera.CONF_H264_PFRAME_NUMS = 0
+
 --- 是否启动摄像头预览功能，默认开启 (number)
 camera.CONF_PREVIEW_ENABLE = 0
 
 --- 摄像头预览画面的旋转角度 (number)
 camera.CONF_PREVIEW_ROTATE = 0
+
+--- 设置USB摄像头的帧率 (number)
+camera.CONF_UVC_FPS = 0
+
+--- 设置摄像头日志级别 (number)
+camera.CONF_LOG_LEVEL = 0
 
 --- 初始化摄像头
 ---@param InitReg_or_cspi_id table|integer 如果是table,则是DVP摄像头的配置见demo/camera/dvp_camera,同时忽略后续参数;如果是数字,则是camera spi总线序号

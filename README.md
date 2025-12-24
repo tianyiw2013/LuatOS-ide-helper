@@ -1,16 +1,13 @@
 # LuatOS IDE Helper 使用说明 (VSCode)
 
-最后生成时间：**2025/11/02 19:44:07**
-
-## 下载LuatOS-ide-helper
-下载并解压缩[LuatOS-ide-helper.zip](https://gitee.com/tianyiw/LuatOS-ide-helper/releases)放到某个文件夹，例如`D:/Luatools/resource/LuatOS_IDE_Helpers`
+最后生成时间：**2025/12/24 15:01:22**
 
 ## 安装扩展
 
 1. VSCode 扩展市场搜索 `emmylua` 并安装
 2. 建议卸载其他`Lua`扩展，防止冲突
 
-> 我们推荐使用`emmylua`扩展，当然您想使用其他`Lua`扩展或也完全没问题，请自行根据对应的扩展进行设置。
+> 我们推荐使用`emmylua`扩展，当前您想使用其他`Lua`扩展也完全没问题，请自行根据对应的扩展进行设置。
 
 ```yaml
 名称: EmmyLua
@@ -39,8 +36,9 @@ VS Marketplace 链接: https://marketplace.visualstudio.com/items?itemName=tangz
 
 ## 其他说明
 
-- [LuatOS_IDE_Helpers](https://gitee.com/tianyiw/LuatOS-ide-helper)文件使用`python`脚本自动提取自`LuatOS`源码中的`@api`注解
-- 若发现错误请及时请往git仓库提交[issue](https://gitee.com/tianyiw/LuatOS-ide-helper/issues)，或直接提交[PR](https://gitee.com/tianyiw/LuatOS-ide-helper/pulls)
+- [LuatOS_IDE_Helpers](https://gitee.com/openLuat/LuatOS/tree/master/tools/LuatOS_IDE_Helpers)文件使用`python`脚本自动提取自`LuatOS`源码中的`@api`注解
+- 若发现错误请及时请往git仓库提交[issue](https://gitee.com/openLuat/LuatOS/issues)，或直接提交[PR](https://gitee.com/openLuat/LuatOS/pulls)
+- 获取最新版本请前方官方Git下载 [LuatOS_IDE_Helpers](https://gitee.com/openLuat/LuatOS/tree/master/tools/LuatOS_IDE_Helpers)
 
 ## 待解决问题
 

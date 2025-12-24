@@ -90,8 +90,9 @@ function fatfs.getfree(mount_point) end
 ---@return nil #1 无返回值
 function fatfs.debug(value) end
 
---- 设置fatfs一些特殊参数，大部分卡无需配置，部分不能正常读写的卡，经过配置后可能能读写成功
+--- 设置fatfs一些特殊参数
 ---@param crc_check number 读取时是否跳过CRC检查,1跳过不检查CRC,0不跳过检查CRC,默认不跳过,除非TF卡不支持CRC校验,否则不应该跳过!
 ---@param write_to number 单次写入超时时间,单位ms,默认100ms。
+---@param fmt number 文件系统格式,默认FM_FAT32, 可选值 FM_FAT32, FM_EXFAT
 ---@return nil #1 无返回值
-function fatfs.config(crc_check, write_to) end
+function fatfs.config(crc_check, write_to, fmt) end

@@ -12,7 +12,7 @@ statem = {}
 
 --- 创建一个新的状态机.
 ---@param count number 指令条数,默认32条
----@param repeat number 重复执行的次数, 0 代表不重复, 正整数代表具体重复执行的次数. 暂不支持永续执行
+---@param repeats number 重复执行的次数, 0 代表不重复, 正整数代表具体重复执行的次数. 暂不支持永续执行
 ---@return some #1 若成功,返回状态机指针,否则返回nil
 --- ```lua
 --- gpio.setup(7, 0, gpio.PULLUP)
@@ -33,4 +33,4 @@ statem = {}
 --- 执行之,后续会支持后台执行
 --- sm:exec()
 --- ```
-function statem.create(count, repeat) end
+function statem.create(count, repeats) end

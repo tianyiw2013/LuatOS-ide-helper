@@ -40,6 +40,12 @@ codec.ALAW = 0
 ---@param quality number 编码等级，部分bsp有内部编解码器，可能需要提前输入编解码等级，不知道的就填7
 ---@return userdata #1 成功返回一个数据结构,否则返回nil
 --- ```lua
+--- 目前支持：
+--- codec.MP3 解码
+--- codec.AMR 编码+解码
+--- codec.AMR_WB 编码(部分BSP支持，例如Air780EHM,Air8000)+解码
+--- codec.WAV WAV本身就是PCM数据，无需编解码
+--- codec.ULAW codec.ALAW 编码+解码
 --- 创建解码器
 --- local decoder = codec.create(codec.MP3)--创建一个mp3的decoder
 --- 创建编码器
@@ -66,18 +72,19 @@ function codec.info(decoder, file_path) end
 --- decoder从文件中解析出原始音频数据，比如从MP3文件里解析出PCM数据，这里的文件路径已经在codec.info传入，不需要再次传入
 ---@param decoder userdata 解码用的decoder
 ---@param out_buff zbuff 存放输出数据的zbuff，空间必须不少于16KB
+---@param size number 最少解码出多少字节的音频数据,默认16384
 ---@return boolean #1 是否成功解析
 --- ```lua
 --- 大内存设备
 --- local buff = zbuff.create(16*1024)
---- local result = codec.data(coder, buff)
+--- local result = codec.data(coder, buff, 8192)
 --- 小内存设备
 --- local buff = zbuff.create(8*1024)
 --- local result = codec.data(coder, buff, 4096)
 --- ```
-function codec.data(decoder, out_buff) end
+function codec.data(decoder, out_buff, size) end
 
---- 编码音频数据，由于flash和ram空间一般比较有限，除了部分bsp有内部amr编码功能，目前只支持amr-nb编码
+--- 编码音频数据，由于flash和ram空间一般比较有限，除了部分bsp有内部amr编码功能以外只支持amr-nb编码
 ---@param coder userdata codec.create创建的编解码用的coder
 ---@param in_buffer zbuff 输入的数据,zbuff形式,从0到used
 ---@param out_buffer zbuff 输出的数据,zbuff形式,自动添加到buff的尾部,如果空间大小不足,会自动扩展,但是会额外消耗时间,甚至会失败,所以尽量一开始就给足空间

@@ -49,12 +49,14 @@ function ws2812.set(leds, index, R, G, B) end
 
 --- 发送数据到设备
 ---@param leds userdata 通过ws2812.create获取到的上下文
+---@param fast_mode boolean GPIO模式下是否使用快速发送模式，默认不使用，其他模式均强制不使用。仅适用少量灯使用，灯数量不能超过os-tick时间/1个灯数据帧发送最长时间
 ---@return boolean #1 设置成功返回true,否则返回nil
+---@return number #2 快速发送模式下数据帧发送总消耗时间，不包括起始帧，单位CPU-TICK。非快速发送模式下，是随机值
 --- ```lua
---- 没有更多参数, 发就完事了
---- ws2812.send(leds)
+--- ws2812.send(leds)    --普通模式发送，无需处理返回值
+--- local _,t = ws2812.send(leds, true) --快速模式下，需要对消耗时间进行判断，超过理论时间太多说明被中断打断过，需要重发
 --- ```
-function ws2812.send(leds) end
+function ws2812.send(leds, fast_mode) end
 
 --- 配置额外参数
 ---@param leds userdata 通过ws2812.create获取到的上下文

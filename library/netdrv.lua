@@ -19,6 +19,9 @@ netdrv.WHALE = 0
 --- 控制类型-复位,当前仅支持CH390H (number)
 netdrv.CTRL_RESET = 0
 
+--- 控制类型-1=启动UP，0关闭DOWN (number)
+netdrv.CTRL_UPDOWN = 0
+
 --- 请求对网卡硬复位,当前仅支持CH390H (number)
 netdrv.RESET_HARD = 0
 
@@ -29,9 +32,9 @@ netdrv.RESET_SOFT = 0
 netdrv.EVT_SOCKET = 0
 
 --- 初始化指定netdrv设备
----@param id number 网络适配器编号, 例如 socket.LWIP_ETH
----@param tp number 实现方式,如果是设备自带的硬件,那就不需要传, 外挂设备需要传,当前支持CH390H/D
----@param opts number 外挂方式,需要额外的参数,参考示例
+---@param id number 网络适配器编号, 例如 socket.LWIP_ETH, socket.LWIP_USER0
+---@param tp number 实现方式,如果是设备自带的硬件,那就不需要传, 外挂设备需要传,当前支持CH390H/D/OPENVPN等
+---@param opts table 外挂方式,需要额外的参数,参考示例
 ---@return boolean #1 初始化成功与否
 --- ```lua
 --- Air8101初始化内部以太网控制器
@@ -117,6 +120,9 @@ function netdrv.ready(id) end
 --- 重启网卡, 仅CH390H支持, 其他网络设备暂不支持
 --- 本函数于 2025.4.14 新增
 --- netdrv.ctrl(socket.LWIP_ETH, netdrv.CTRL_RESET, netdrv.RESET_HARD)
+--- 关闭CH390H通信并下电PHY，可用于降功耗；第三个参数1=关闭，0=重新启动
+--- netdrv.ctrl(socket.LWIP_ETH, netdrv.CTRL_DOWN, 1)
+--- netdrv.ctrl(socket.LWIP_ETH, netdrv.CTRL_DOWN, 0)
 --- ```
 function netdrv.ctrl(id, cmd, arg) end
 

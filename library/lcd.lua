@@ -502,12 +502,11 @@ function lcd.rgb565(r, g, b, swap) end
 
 --- 硬件lcd qspi接口配置，需要在lcd.init前配置好
 ---@param _1_wire_command number lcd命令模式下的qspi指令
----@param _1_wire_command number lcd数据模式下，1线地址，4线数据的qspi指令，
----@param _1_wire_command_4_wire_data number lcd数据模式下，4线地址，4线数据的qspi指令，可以留空，如果存在，发送数据时优先使用这个模式
----@param _4_wire_command_4_wire_data number 帧同步时的地址值，只有无ram的屏幕需要，如果能用0x2c发送数据则不需要这个参数
----@param vsync_reg number 行同步时的指令，一般情况和命令模式下的指令一致，只有无ram的屏幕需要，如果能用0x2c发送数据则不需要这个参数
----@param hsync_cmd number 行同步时的地址值，只有无ram的屏幕需要，如果能用0x2c发送数据则不需要这个参数
----@param hsync_reg any 
+---@param _1_wire_command_4_wire_data number lcd数据模式下，1线地址，4线数据的qspi指令，
+---@param _4_wire_command_4_wire_data number lcd数据模式下，4线地址，4线数据的qspi指令，可以留空，如果存在，发送数据时优先使用这个模式
+---@param vsync_reg number 帧同步时的地址值，只有无ram的屏幕需要，如果能用0x2c发送数据则不需要这个参数
+---@param hsync_cmd number 行同步时的指令，一般情况和命令模式下的指令一致，只有无ram的屏幕需要，如果能用0x2c发送数据则不需要这个参数
+---@param hsync_reg number 行同步时的地址值，只有无ram的屏幕需要，如果能用0x2c发送数据则不需要这个参数
 ---@return nil #1 无返回值
 --- ```lua
 --- sh8601z驱动ic所需的qspi配置
@@ -517,7 +516,7 @@ function lcd.rgb565(r, g, b, swap) end
 --- CO5300驱动ic所需的qspi配置
 --- lcd.qspi(0x02, 0x32, 0x12)
 --- ```
-function lcd.qspi(_1_wire_command, _1_wire_command, _1_wire_command_4_wire_data, _4_wire_command_4_wire_data, vsync_reg, hsync_cmd, hsync_reg) end
+function lcd.qspi(_1_wire_command, _1_wire_command_4_wire_data, _4_wire_command_4_wire_data, vsync_reg, hsync_cmd, hsync_reg) end
 
 --- 用户使用脚本初始化LCD完成后，必须调用本API
 ---@return nil #1 无返回值

@@ -37,6 +37,12 @@ uart.MSB = 0
 --- 虚拟串口0 (number)
 uart.VUART_0 = 0
 
+--- 虚拟串口1 (number)
+uart.VUART_1 = 0
+
+--- 虚拟串口2 (number)
+uart.VUART_2 = 0
+
 --- 遇到错误时抛弃缓存的数据 (number)
 uart.ERROR_DROP = 0
 

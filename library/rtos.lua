@@ -57,12 +57,19 @@ function rtos.buildDate() end
 function rtos.bsp() end
 
 --- 获取固件版本号
+---@param more number more 可选参数,默认不传. 传入true时,会额外返回数字版本号
 ---@return string #1 固件版本号,例如"V0001"
 --- ```lua
 --- 读取版本号
 --- local luatos_version = rtos.version()
+--- 读取版本号及数字版本号, 2025.11.1之后的固件支持
+--- 如果不是数字固件,luatos_version_num 会是0
+--- 如果是不支持的固件, luatos_version_num 会是nil
+--- local luatos_version, luatos_version_num = rtos.version(true)
+--- 读取底层位数, 32或者64, 2025.12.23 新增
+--- local luatos_version, luatos_version_num, luatos_bits = rtos.version(true)
 --- ```
-function rtos.version() end
+function rtos.version(more) end
 
 --- 进入待机模式, 仅部分设备可用, 本API已废弃, 推荐使用pm库
 ---@param timeout number 休眠时长,单位毫秒

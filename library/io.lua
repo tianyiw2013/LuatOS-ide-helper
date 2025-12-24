@@ -16,7 +16,7 @@
 --- 读写默认,打开文件
 --- local fd = io.open("/xxx.txt", "wb")
 --- 写入文件,且截断为0字节
---- local fd = io.open("/xxx.txt", "wb+")
+--- local fd = io.open("/xxx.txt", "w+b")
 --- 追加模式
 --- local fd = io.open("/xxx.txt", "a")
 --- 若文件打开成功, fd不为nil,否则就是失败了
@@ -34,11 +34,11 @@
 --- 以下是写入0x12, 0x13
 ---   fd:write(string.char(0x12, 0x13))
 --- 移动句柄,绝对坐标
----   fd:seek(1024, io.SEEK_SET)
+---   fd:seek("set", 1024)
 --- 移动句柄,相对坐标
----   fd:seek(1024, io.SEEK_CUR)
+---   fd:seek("cur", 1024)
 --- 移动句柄,反向绝对坐标,从文件结尾往文件头部算
----   fd:seek(124, io.SEEK_END)
+---   fd:seek("end", 124)
 --- 执行完操作后,一定要关掉文件
 ---   fd:close()
 --- 2025.9.30 新增file:write支持zbuff参数
@@ -84,11 +84,11 @@ function file:close() end
 --- 以下是写入0x12, 0x13
 ---   fd:write(string.char(0x12, 0x13))
 --- 移动句柄,绝对坐标
----   fd:seek(1024, io.SEEK_SET)
+---   fd:seek("set", 1024)
 --- 移动句柄,相对坐标
----   fd:seek(1024, io.SEEK_CUR)
+---   fd:seek("cur", 1024)
 --- 移动句柄,反向绝对坐标,从文件结尾往文件头部算
----   fd:seek(124, io.SEEK_END)
+---   fd:seek("end", 124)
 --- 执行完操作后,一定要关掉文件
 ---   fd:close()
 --- end

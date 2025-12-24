@@ -122,7 +122,8 @@ function crypto.cipher_decrypt(type, padding, str, key, iv) end
 ---@param poly number poly值,默认0x0000,范围0-0xFFFF
 ---@param initial number initial值,默认0x0000,范围0-0xFFFF
 ---@param finally number finally值,默认0x0000,范围0-0xFFFF
----@param inReversem outReverse number 输入反转,1反转,默认0不反转
+---@param inReversem number 输入反转,1反转,默认0不反转
+---@param outReverse number 输出反转,1反转,默认0不反转
 ---@return number #1 对应的CRC16值
 --- ```lua
 --- 计算字符串的CRC16
@@ -132,7 +133,7 @@ function crypto.cipher_decrypt(type, padding, str, key, iv) end
 --- zbuff:seek(0)
 --- crc = crypto.crc16(zbuff)
 --- ```
-function crypto.crc16(method, data, poly, initial, finally, inReversem outReverse) end
+function crypto.crc16(method, data, poly, initial, finally, inReversem, outReverse) end
 
 --- 直接计算modbus的crc16值
 ---@param data string 数据
@@ -289,6 +290,7 @@ function crypto.md(tp, data, hmac) end
 
 --- 创建流式hash用的stream
 ---@param tp string hash类型, 大写字母, 例如 "MD5" "SHA1" "SHA256"
+---@param hmac string hmac值，可选
 ---@return userdata #1 成功返回一个数据结构,否则返回nil
 --- ```lua
 --- 无hmac的hash stream
@@ -300,7 +302,7 @@ function crypto.md(tp, data, hmac) end
 --- local sha1_stream = crypto.hash_init("SHA1", "123456")
 --- local sha256_stream = crypto.hash_init("SHA256", "123456")
 --- ```
-function crypto.hash_init(tp) end
+function crypto.hash_init(tp, hmac) end
 
 --- 流式hash更新数据
 ---@param stream userdata crypto.hash_init()创建的stream, 必选
