@@ -36,9 +36,9 @@ VS Marketplace 链接: https://marketplace.visualstudio.com/items?itemName=tangz
 
 ## 其他说明
 
-- [LuatOS_IDE_Helpers](https://gitee.com/openLuat/LuatOS/tree/master/tools/LuatOS_IDE_Helpers)文件使用`python`脚本自动提取自`LuatOS`源码中的`@api`注解
-- 若发现错误请及时请往git仓库提交[issue](https://gitee.com/openLuat/LuatOS/issues)，或直接提交[PR](https://gitee.com/openLuat/LuatOS/pulls)
-- 获取最新版本请前方官方Git下载 [LuatOS_IDE_Helpers](https://gitee.com/openLuat/LuatOS/tree/master/tools/LuatOS_IDE_Helpers)
+- [LuatOS_IDE_Helpers](https://gitee.com/tianyiw/LuatOS-ide-helper)文件使用`python`脚本自动提取自`LuatOS`源码中的`@api`注解
+- 若发现错误请及时请往git仓库提交[issue](https://gitee.com/tianyiw/LuatOS-ide-helper/issues)，或直接提交[PR](https://gitee.com/tianyiw/LuatOS-ide-helper/pulls)
+- 获取最新版本可前往Git下载 [LuatOS_IDE_Helpers](https://gitee.com/tianyiw/LuatOS-ide-helper/releases)
 
 ## 待解决问题
 
